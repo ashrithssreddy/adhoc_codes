@@ -6,8 +6,10 @@ all_files
 
 for file in all_files:
     print(file)
-    im = Image.open(file)    
-    # im.save("resized_2" + file, dpi=(900,1200)) 
-    size = 900, 1200
-    im_resized = im.resize(size, Image.ANTIALIAS)
-    im_resized.save(file) # , "JPG"    
+    im = Image.open(file)
+    
+    if im.size[0] > im.size[1]:
+        im = im.transpose(Image.ROTATE_270)
+
+    size = 900, 1200    
+    im.resize(size, Image.ANTIALIAS).save(file) 
